@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Showroom | MCJ Web Solutions</title>
+<meta name="description" content="Live websites and web applications built by MCJ Web Solutions. Explore our work.">
+<meta property="og:title" content="Showroom | MCJ Web Solutions">
+<meta property="og:description" content="Live websites and web applications, ready to explore.">
+<link rel="icon" href="images/logo-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#06070b; --bg2:#0b0d14; --surface:rgba(255,255,255,.04); --line:rgba(255,255,255,.09);
+  --blue:#2f8cff; --violet:#7c5cff; --white:#f5f7fb; --muted:#9aa3b8;
+  --grad:linear-gradient(135deg,#2f8cff 0%,#7c5cff 100%);
+  --r:18px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--muted);line-height:1.7;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+h1,h2,h3{font-family:'Sora',sans-serif;color:var(--white);line-height:1.15}
+.container{width:min(1180px,92%);margin:0 auto}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 28px;border-radius:12px;font-weight:600;font-size:.95rem;border:1px solid transparent;cursor:pointer;font-family:inherit;transition:transform .25s,box-shadow .25s,background .25s}
+.btn:hover{transform:translateY(-3px)}
+.btn-primary{background:var(--grad);color:#fff;box-shadow:0 10px 34px rgba(95,110,255,.35)}
+.btn-primary:hover{box-shadow:0 14px 44px rgba(95,110,255,.5)}
+.btn-ghost{border-color:rgba(255,255,255,.2);color:var(--white);background:rgba(255,255,255,.03)}
+.btn-ghost:hover{background:rgba(255,255,255,.09)}
+
+/* NAV */
+.navbar{position:sticky;top:0;z-index:1000;background:rgba(6,7,11,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:12px 0}
+.nav-container{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo img{height:44px;width:auto}
+.nav-right{display:flex;align-items:center;gap:18px}
+.back{font-size:.92rem;font-weight:500;color:var(--muted);transition:color .25s}
+.back:hover{color:var(--white)}
+.btn-nav{padding:10px 22px;font-size:.88rem}
+
+/* HEADER */
+.page-head{padding:80px 0 30px;text-align:center;position:relative;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(110px);pointer-events:none}
+.orb.a{width:420px;height:420px;background:#2f8cff;top:-160px;left:-120px;opacity:.4}
+.orb.b{width:440px;height:440px;background:#7c5cff;top:-180px;right:-120px;opacity:.35}
+.page-head .inner{position:relative}
+.eyebrow{display:inline-block;font-size:.78rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-bottom:14px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.page-head h1{font-size:clamp(2.2rem,6vw,3.8rem);font-weight:800;margin-bottom:16px;letter-spacing:-.02em}
+.page-head p{max-width:520px;margin:0 auto;font-size:1.08rem}
+
+/* FILTERS */
+.filters{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin:34px 0 50px}
+.filter{padding:11px 22px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--muted);font-family:inherit;font-weight:600;font-size:.9rem;cursor:pointer;transition:all .25s}
+.filter:hover{color:var(--white);border-color:rgba(124,92,255,.5)}
+.filter.active{background:var(--grad);color:#fff;border-color:transparent;box-shadow:0 8px 26px rgba(95,110,255,.3)}
+
+/* GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:28px;padding-bottom:90px}
+.project{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:transform .35s,border-color .35s,box-shadow .35s}
+.project:hover{transform:translateY(-6px);border-color:rgba(47,140,255,.5);box-shadow:0 26px 64px rgba(47,140,255,.15)}
+.project.hide{display:none}
+.live-preview{height:250px;overflow:hidden;position:relative;background:#10131c;border-bottom:1px solid var(--line)}
+.live-preview iframe{width:166.667%;height:166.667%;transform:scale(.6);transform-origin:top left;pointer-events:none;border:0;opacity:0;transition:opacity .6s}
+.live-preview iframe.loaded{opacity:1}
+.live-preview::before{content:"Loading preview…";position:absolute;inset:0;display:grid;place-items:center;font-size:.85rem;color:#5d667c}
+.tag{position:absolute;top:14px;left:14px;z-index:2;background:rgba(6,7,11,.8);backdrop-filter:blur(8px);border:1px solid var(--line);color:var(--white);font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:999px}
+.info{padding:24px}
+.info h3{font-size:1.2rem;margin-bottom:6px}
+.info p{font-size:.92rem;margin-bottom:16px}
+.btn-live{font-weight:600;font-size:.93rem;color:var(--blue);transition:color .25s}
+.btn-live:hover{color:var(--violet)}
+
+/* CTA */
+.cta{padding:90px 0;text-align:center;background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.cta h2{font-size:clamp(1.9rem,4.5vw,2.9rem);font-weight:800;margin-bottom:14px}
+.cta p{max-width:500px;margin:0 auto 32px}
+.cta-btns{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+
+/* FOOTER */
+.footer{padding:44px 0 36px;text-align:center}
+.contact-links{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:26px}
+.contact-links a{padding:11px 22px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--white);font-size:.9rem;transition:all .25s}
+.contact-links a:hover{border-color:var(--violet);transform:translateY(-3px)}
+.copy{font-size:.85rem;opacity:.6}
+
+@media(max-width:560px){
+  .page-head{padding:56px 0 20px}
+  .grid{grid-template-columns:1fr}
+  .back{font-size:.85rem}
+  .logo img{height:40px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="container nav-container">
+    <a href="index.html" class="logo"><img src="images/MCJ_web_solution_logo.png" alt="MCJ Web Solutions logo"></a>
+    <div class="nav-right">
+      <a href="index.html" class="back">← Back to Home</a>
+      <a href="https://wa.me/2347070596863" class="btn btn-primary btn-nav" target="_blank" rel="noopener">Hire Us</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<header class="page-head">
+  <div class="orb a"></div><div class="orb b"></div>
+  <div class="container inner">
+    <span class="eyebrow">Showroom</span>
+    <h1>Our <span class="grad">Work</span></h1>
+    <p>Live websites and web applications we've built. Tap any project to explore it.</p>
+  </div>
+</header>
+
+<!-- PROJECTS -->
+<main class="container">
+
+  <div class="filters" id="filters">
+    <button class="filter active" data-filter="all">All</button>
+    <button class="filter" data-filter="hospitality">Restaurants &amp; Hotels</button>
+    <button class="filter" data-filter="business">Business Sites</button>
+    <button class="filter" data-filter="apps">Web Apps</button>
+  </div>
+
+  <div class="grid" id="grid">
+
+    <article class="project" data-cat="hospitality">
+      <div class="live-preview"><span class="tag">Hospitality</span><iframe data-src="https://aurum-palace.netlify.app/" scrolling="no" title="Aurum Palace"></iframe></div>
+      <div class="info">
+        <h3>Aurum Palace</h3>
+        <p>Luxury hospitality landing page and booking UI.</p>
+        <a href="https://aurum-palace.netlify.app/" target="_blank" rel="noopener" class="btn-live">Visit Live Site ↗</a>
+      </div>
+    </article>
+
+    <article class="project" data-cat="business">
+      <div class="live-preview"><span class="tag">Business</span><iframe data-src="https://emukahdigital.com.ng/" scrolling="no" title="Emukah Digital"></iframe></div>
+      <div class="info">
+        <h3>Emukah Digital</h3>
+        <p>Corporate website for a digital agency.</p>
+        <a href="https://emukahdigital.com.ng/" target="_blank" rel="noopener" class="btn-live">Visit Live Site ↗</a>
+      </div>
+    </article>
+
+    <article class="project" data-cat="apps">
+      <div class="live-preview"><span class="tag">Web App</span><iframe data-src="https://mechconnect-02.netlify.app/" scrolling="no" title="MECHCONNECT"></iframe></div>
+      <div class="info">
+        <h3>MECHCONNECT</h3>
+        <p>Full-stack platform for academics.</p>
+        <a href="https://mechconnect-02.netlify.app/" target="_blank" rel="noopener" class="btn-live">Visit Live Site ↗</a>
+      </div>
+    </article>
+
+    <article class="project" data-cat="apps">
+      <div class="live-preview"><span class="tag">Web App</span><iframe data-src="https://mcj-smart-attendance.netlify.app/" scrolling="no" title="Smart Attendance"></iframe></div>
+      <div class="info">
+        <h3>Smart-Attendance Dashboard</h3>
+        <p>Real-time analytical attendance platform.</p>
+        <a href="https://mcj-smart-attendance.netlify.app/" target="_blank" rel="noopener" class="btn-live">Visit Live Site ↗</a>
+      </div>
+    </article>
+
+    <article class="project" data-cat="apps">
+      <div class="live-preview"><span class="tag">Web App</span><iframe data-src="https://morkahchiemerie-create.github.io/Mcj-first-website-/dashboard.html" scrolling="no" title="University Dashboard"></iframe></div>
+      <div class="info">
+        <h3>University Dashboard</h3>
+        <p>Website for Mechanical Engineering students.</p>
+        <a href="https://morkahchiemerie-create.github.io/Mcj-first-website-/dashboard.html" target="_blank" rel="noopener" class="btn-live">Visit Live Site ↗</a>
+      </div>
+    </article>
+
+    <!--
+      TO ADD A NEW PROJECT: copy one block above, paste it here, then change:
+      1) data-cat (hospitality, business or apps)
+      2) the tag text, 3) the iframe data-src link, 4) the name, 5) the description, 6) the Visit link
+      Restaurant sites from your price tiers can go here once deployed on Netlify,
+      for example named "Starter", "Plus" and "Premium" so visitors see the difference.
+    -->
+
+  </div>
+</main>
+
+<!-- CALL TO ACTION -->
+<section class="cta">
+  <div class="container">
+    <h2>Want a site like <span class="grad">this?</span></h2>
+    <p>Tell us about your business and we'll send you a clear quote.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/2349071756381?text=Hello%20MCJ%20Web%20Solutions%2C%20I%20saw%20your%20showroom%20and%20I%27d%20like%20a%20website." class="btn btn-primary" target="_blank" rel="noopener">Chat on WhatsApp</a>
+      <a href="index.html#pricing" class="btn btn-ghost">See Pricing</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="contact-links">
+      <a href="https://wa.me/2349071756381" target="_blank" rel="noopener">WhatsApp Us</a>
+      <a href="mailto:mcjwebsolutions@gmail.com">mcjwebsolutions@gmail.com</a>
+      <a href="tel:+2349071756381">+234 907 1756 381</a>
+    </div>
+    <p class="copy">&copy; <span id="year">2026</span> MCJ Web Solutions. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  // Filter tabs
+  const filters = document.querySelectorAll('.filter');
+  const cards = document.querySelectorAll('.project');
+  filters.forEach(btn => btn.addEventListener('click', () => {
+    filters.forEach(f => f.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    cards.forEach(c => c.classList.toggle('hide', f !== 'all' && c.dataset.cat !== f));
+    loadVisible();
+  }));
+
+  // Load each live preview only when it scrolls into view (keeps the page fast on phones)
+  function loadFrame(frame) {
+    if (frame.src) return;
+    frame.src = frame.dataset.src;
+    frame.addEventListener('load', () => frame.classList.add('loaded'));
+  }
+  const frames = document.querySelectorAll('iframe[data-src]');
+  let io = null;
+  if ('IntersectionObserver' in window) {
+    io = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (en.isIntersecting) { loadFrame(en.target); io.unobserve(en.target); }
+      });
+    }, { rootMargin: '250px' });
+    frames.forEach(f => io.observe(f));
+  } else {
+    frames.forEach(loadFrame);
+  }
+  function loadVisible() { /* observer handles cards that become visible after filtering */ }
+
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
